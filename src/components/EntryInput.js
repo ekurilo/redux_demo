@@ -8,6 +8,12 @@ export default class EntryInput extends Component {
     }
   }
 
+  componentDidMount() {
+    if (!this.props.isNew) {
+      this.setState({key: this.props.entry.entry.key, value: this.props.entry.entry.value})
+    }
+  }
+
   handleChange(e) {
     let fieldName = e.target.name;
     let fieldValue = e.target.value;
@@ -15,7 +21,13 @@ export default class EntryInput extends Component {
   }
 
   handleAdd() {
-    this.props.addEntry({key: this.state.key, value: this.state.value});
+    if (this.props.isNew) {
+      this.props.actions.addEntry({key: this.state.key, value: this.state.value});
+    } else {
+      let id = this.props.entry.id;
+      let payload = {key: this.state.key, value: this.state.value};
+      this.props.editEntry(id, payload)
+    }
   }
   render() {
     return (

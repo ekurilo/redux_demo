@@ -25,6 +25,9 @@ export default function entries(state = initialState, action) {
     case 'DELETE_ENTRY':
       return state.filter(elem => elem.id !== action.id);
 
+    case 'SHOW_ALL':
+      return action.entries;
+
     default:
       return state;
   }

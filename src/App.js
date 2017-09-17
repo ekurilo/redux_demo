@@ -9,10 +9,14 @@ import {bindActionCreators} from 'redux';
 import * as EntryActions from './actions/entries';
 
 class App extends Component {
+
+  componentDidMount() {
+    this.props.actions.showAll(this.props.entries);
+  }
   render() {
     return (
       <div className="App">
-        <EntryInput addEntry={this.props.actions.addEntry}/>
+        <EntryInput actions={this.props.actions} isNew={true}/>
         <EntryList entries={this.props.entries} actions={this.props.actions}/>
       </div>
     );
